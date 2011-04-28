@@ -1,0 +1,21 @@
+.field-normal{
+	border:1px green solid;
+	display:inline-block;
+	overflow:visible;
+	padding:1px;
+	background-color:white;
+}
+
+.field-highlighted{
+	border:1px #aaaa00 solid;
+	padding:1px;
+	-moz-box-shadow: 0px 0px 5px #aaaa00; /* FF3.5+ */
+	-webkit-box-shadow: 0px 0px 5px #000000; /* Saf3.0+, Chrome */
+	box-shadow: 0px 0px 5px #000000; /* Opera 10.5, IE9, Chrome 10+ */
+}
+
+.round-all-5px{
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-border-radius: 5px;
+}
