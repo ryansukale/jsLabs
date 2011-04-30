@@ -1,0 +1,48 @@
+<html>
+	<head>
+	
+		<link rel="stylesheet" href="../widgets/jquery.bubble/css/jquery.bubble.css"></link>
+		
+		<script type="text/javascript" src="../../jquery.js"></script>
+		<script type="text/javascript" src="../../jquery-ui-1.8.11.custom/development-bundle/ui/jquery.ui.widget.js"></script>
+		<script type="text/javascript" src="../widgets/jquery.bubble/jquery.bubble.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){		
+				$('input[name="userName"]').bubble();
+			});
+		</script>
+		
+		<style type="text/css">
+			
+			div.div2{
+					width:100px;
+	height:100px;
+    opacity: 0.7;
+			}
+			.div2{
+	background-color:#00ccaa;
+	position:absolute;
+	left:10px;
+	top:-30px;
+	z-index:10;
+}
+
+.div1{
+	background-color:#00ccaa;
+	position:relative;
+	float:left;
+	z-index:10;
+}
+		
+		</style>
+		
+	</head>
+	<body>
+		
+		<div style="float:left;"><input type="text" name="userName"></input></div>
+		<div class="div1">
+			div 2 : relative
+		</div>
+	</body>
+</html>

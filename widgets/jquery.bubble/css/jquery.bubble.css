@@ -1,0 +1,11 @@
+.bubble-visible{
+	-moz-border-radius:10px;
+	border-radius:10px;
+	display:inline-block;
+	background-color:#fafafa;
+	padding:5px;
+	text-align:center;
+	position:absolute;
+	z-index:1000;
+	max-width:200px;
+}
