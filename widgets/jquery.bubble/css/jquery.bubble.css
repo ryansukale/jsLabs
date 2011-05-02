@@ -14,35 +14,43 @@
 }
 
 .triangle-point-bottom{
-	border-top:20px solid blue;
+	position:absolute;
+	border-top:21px solid #fafafa;
 	border-right:6px solid transparent;
 	border-left:6px solid transparent;
 	width:0px;
 	display:inline-block;
+	z-index: 1001;
 }
 
 
 .triangle-point-left{
+	position:absolute;
 	border-top:10px solid transparent;
-	border-right:20px solid red;
+	border-right:21px solid red;
 	border-bottom:10px solid transparent;
 	width:0px;
 	display:inline-block;
+	z-index: 1001;
 }
 
 
 .triangle-point-top{
+	position:absolute;
 	border-right:10px solid transparent;
-	border-bottom:20px solid yellow;
+	border-bottom:21px solid yellow;
 	border-left:10px solid transparent;
 	width:0px;
 	display:inline-block;
+	z-index: 1001;
 }
 
 
 .triangle-point-right{
+	position:absolute;
 	border-top:10px solid transparent;
 	border-bottom:10px solid transparent;
-	border-left:20px solid black;
+	border-left:21px solid black;
 	width:0px;
+	z-index: 1001;
 }

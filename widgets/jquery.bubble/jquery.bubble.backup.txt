@@ -26,15 +26,6 @@
 	
 	/*Create the dom element that will be used to hold the details of the bubble*/
 	var $bubble = $('<span></span>');
-	var $pointer = $('<span></span>');
-	
-	var $container=$('<span style="overflow:auto;display:inline-block;background-color:transparent;"></span>');
-	//console.log($container);
-	$container.append($bubble);
-	$container.append($pointer);
-	
-	//console.dir($container);
-	//console.log($container.html());
 	
 	/*The css class for the bubble*/
 	$bubble.addClass('bubble-visible');
@@ -46,10 +37,8 @@
 	/*By default, the bubble is hidden*/
 	//$bubble.css({'opacity':0,'display':'none'});
 	//$bubble.css({'opacity':0,'display':'none'});
-	$('body').append($container);
+	$('body').append($bubble);
 	widget.bubble=$bubble;
-	widget.pointer=$pointer;
-	widget.container=$container;
 	
 	/*Now that the bubble has been added to the DOM, you can make several calculations 
 	for its positioning based upon its initial rendering*/
@@ -57,8 +46,7 @@
 	if($bubble.width()>options.maxWidth){
 		/*since the max-width property does not work in IE, 
 		we set the max width by comparison after the element is added to the dom*/
-		$bubble.css({'width':options.maxWidth});
-		$container.css({'opacity':'0'});
+		$bubble.css({'width':options.maxWidth,'opacity':'0'});
 	}
 	var presets = widget._getPresets();
 	
@@ -69,20 +57,18 @@
 	$bubble.css('left',presets.coordinates.x);
 	$bubble.css('top',presets.coordinates.y);
 
-	$container.hide();
+	$bubble.hide();
 	if($bubble.width()>options.maxWidth){
 		/*since the max-width property does not work in IE, 
 		we set the max width by comparison after the element is added to the dom*/
-		//$bubble.css({'width':options.maxWidth,'opacity':'0'});
-		
+		$bubble.css({'width':options.maxWidth,'opacity':'0'});
 	}
 	
 	/*Bind the event of the browser to the dom element*/
 	$domElement.bind(options.display,function(event){
-		//console.log("as");
 		widget._show(event);
 	});
-	//console.log("asd : "+$container.html());
+	
 	
 	//console.log($bubble);
 	//console.log($domElement.data('bubble'));
@@ -96,25 +82,21 @@
 	var options=widget.options;
 	
 	var $bubble = widget.bubble;
-	var $container=widget.container;
 	
-	//console.log('show');
 	
-	$container.show();
-	
-	$container.animate({'opacity':'1'},500);
+	$bubble.show();
+	$bubble.animate({'opacity':'1'},500);
 	
 	//console.log('show');
 	
 	if(!isNaN(options.duration)){
 		var timerId = setTimeout(function(){
-			$container.animate({'opacity':'0'},1000,function(){
-				$container.hide();
+			$bubble.animate({'opacity':'0'},1000,function(){
+				$bubble.hide();
 			});
 			
 		},options.duration);
 	}
-	
   },
   _getPosition:function(obj){
 	/*Snippet Taken from http://www.quirksmode.org/js/findpos.html */
@@ -135,7 +117,6 @@
 	var $domElement=widget.element;
 	var options=widget.options;
 	var $bubble = widget.bubble;
-	var $pointer = widget.pointer;
 	
 
 	/*This function will be used to set up the presets for the widget*/
@@ -196,9 +177,9 @@
 	
 	var pointerCoord={x:0,y:0};
 	
-	//var $pointer=$('<span></span>');
+	var $pointer=$('<span></span>');
 	
-	//$('body').append($pointer);
+	$('body').append($pointer);
 	
 	//We are going to calculate the coordinates of the triangle to center align it along the domElement
 	if(options.position=='top'){
@@ -206,8 +187,8 @@
 		$pointer.addClass('triangle-point-bottom');
 		$pointer.css('border-top-width',options.distance);
 		pointerCoord.x=domCenter.x - $pointer.outerWidth()/2;
-		//console.log(position.x + " " + domCenter.x+ " " + $pointer.outerWidth()/2);
-		pointerCoord.y=position.y - options.distance-1;
+		console.log(position.x + " " + domCenter.x+ " " + $pointer.outerWidth()/2);
+		pointerCoord.y=position.y - options.distance;
 	}
 	else{
 		if(options.position=='bottom'){
