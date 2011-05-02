@@ -1,11 +1,48 @@
 .bubble-visible{
 	-moz-border-radius:10px;
 	border-radius:10px;
+	-webkit-border-radius: 10px;
+
 	display:inline-block;
 	background-color:#fafafa;
 	padding:5px;
 	text-align:center;
 	position:absolute;
 	z-index:1000;
-	max-width:200px;
+	overflow:auto;
+	border:1px solid #dadada;
+}
+
+.triangle-point-bottom{
+	border-top:20px solid blue;
+	border-right:6px solid transparent;
+	border-left:6px solid transparent;
+	width:0px;
+	display:inline-block;
+}
+
+
+.triangle-point-left{
+	border-top:10px solid transparent;
+	border-right:20px solid red;
+	border-bottom:10px solid transparent;
+	width:0px;
+	display:inline-block;
+}
+
+
+.triangle-point-top{
+	border-right:10px solid transparent;
+	border-bottom:20px solid yellow;
+	border-left:10px solid transparent;
+	width:0px;
+	display:inline-block;
+}
+
+
+.triangle-point-right{
+	border-top:10px solid transparent;
+	border-bottom:10px solid transparent;
+	border-left:20px solid black;
+	width:0px;
 }

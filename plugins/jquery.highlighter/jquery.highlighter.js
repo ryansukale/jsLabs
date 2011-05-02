@@ -45,4 +45,3 @@ jQuery.fn.highlighter=function(){
 };
 
 })(jQuery);
-
