@@ -26,9 +26,9 @@
 
 .triangle-point-left{
 	position:absolute;
-	border-top:10px solid transparent;
-	border-right:21px solid red;
-	border-bottom:10px solid transparent;
+	border-top:6px solid transparent;
+	border-right:21px solid #fafafa;
+	border-bottom:6px solid transparent;
 	width:0px;
 	display:inline-block;
 	z-index: 1001;
@@ -37,9 +37,9 @@
 
 .triangle-point-top{
 	position:absolute;
-	border-right:10px solid transparent;
-	border-bottom:21px solid yellow;
-	border-left:10px solid transparent;
+	border-right:6px solid transparent;
+	border-bottom:21px solid #fafafa;
+	border-left:6px solid transparent;
 	width:0px;
 	display:inline-block;
 	z-index: 1001;
@@ -48,9 +48,9 @@
 
 .triangle-point-right{
 	position:absolute;
-	border-top:10px solid transparent;
-	border-bottom:10px solid transparent;
-	border-left:21px solid black;
+	border-top:6px solid transparent;
+	border-bottom:6px solid transparent;
+	border-left:21px solid #fafafa;
 	width:0px;
 	z-index: 1001;
 }

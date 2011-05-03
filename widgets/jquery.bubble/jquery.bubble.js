@@ -150,31 +150,65 @@
 	
 	/*Default coordinates of 0*/
 	var coord = {x:0,y:0};
+	var pointerCoord={x:0,y:0};
+	
 	
 	options.position = options.position?options.position:'top';
 	options.distance = options.distance?options.distance:20;
+
+	var domCenter={};
+	domCenter.x=position.x+$domElement.outerWidth()/2;
+	domCenter.y=position.y+$domElement.outerHeight()/2;	
 	
-	//console.log(options.distance);
-	//console.log(0==false);
-	//console.log(''==false);
 	
-	/*Calculate the coordinates of the div elements to center align the bubble along the domElement*/
+	/*
+		Calculate the coordinates of the div elements to center align the bubble along the domElement
+	
+		The bubble uses triangles to point to the DOM element for which it was initialized.
+		This Triangle should point in the direction based upon the direction of the bubble relative to the element.
+		We create these triangles using pure CSS.
+		For now, the triangles are center aligned on the bubble.
+		
+		We also calculate the coordinates of the triangle to center align it along the domElement
+	*/
+	
 	if(options.position=='top'){
+		$pointer.addClass('triangle-point-bottom');
+		$pointer.css('border-top-width',options.distance);
+		
 		coord.y=position.y-($bubble.outerHeight()+options.distance);
 		coord.x=position.x+($domElement.outerWidth()/2-$bubble.outerWidth()/2);
+		pointerCoord.x=domCenter.x - $pointer.outerWidth()/2;
+		pointerCoord.y=position.y - options.distance-1;
 	}
 	else{
 		if(options.position=='bottom'){
+			$pointer.addClass('triangle-point-top');
+			$pointer.css('border-bottom-width',options.distance);
+			pointerCoord.x=domCenter.x - $pointer.outerWidth()/2;
+			pointerCoord.y=position.y+$domElement.outerHeight()+1;
+			
 			coord.y=(position.y+$domElement.outerHeight())+options.distance;
 			coord.x=position.x+($domElement.outerWidth()/2-$bubble.outerWidth()/2);
 		}
 		else{
 			if(options.position=='left'){
+			
+				$pointer.addClass('triangle-point-right');
+				$pointer.css('border-left-width',options.distance);
+				
+				pointerCoord.x=position.x-(options.distance+1);
+				pointerCoord.y=domCenter.y-$pointer.outerHeight()/2;
 				coord.x=position.x-($bubble.outerWidth()+options.distance);
 				coord.y=position.y+($domElement.outerHeight()/2-$bubble.outerHeight()/2);
 			}
 			else{
 				if(options.position=='right'){
+					$pointer.addClass('triangle-point-left');
+					$pointer.css('border-right-width',options.distance);
+					
+					pointerCoord.x=position.x+$domElement.outerWidth()+1;
+					pointerCoord.y=domCenter.y-$pointer.outerHeight()/2;
 					coord.x=position.x+($domElement.outerWidth()+options.distance);
 					coord.y=position.y+($domElement.outerHeight()/2-$bubble.outerHeight()/2);
 				}
@@ -182,45 +216,6 @@
 		}
 	}
 	
-	
-	/*
-		The bubble uses triangles to point to the DOM element for which it was initialized.
-		This Triangle should point in the direction based upon the direction of the bubble relative to the element.
-		We create these triangles using pure CSS.
-		For now, the triangles are center aligned on the bubble.
-	*/
-	/*Calculate the coordinates of the pointers elements to center align the bubble along the domElement*/
-	var domCenter={};
-	domCenter.x=position.x+$domElement.outerWidth()/2;
-	domCenter.y=position.y+$domElement.outerHeight()/2;
-	
-	var pointerCoord={x:0,y:0};
-	
-	//var $pointer=$('<span></span>');
-	
-	//$('body').append($pointer);
-	
-	//We are going to calculate the coordinates of the triangle to center align it along the domElement
-	if(options.position=='top'){
-		//Since the bubble is at the top, the pointer is in the opposite direction.
-		$pointer.addClass('triangle-point-bottom');
-		$pointer.css('border-top-width',options.distance);
-		pointerCoord.x=domCenter.x - $pointer.outerWidth()/2;
-		//console.log(position.x + " " + domCenter.x+ " " + $pointer.outerWidth()/2);
-		pointerCoord.y=position.y - options.distance-1;
-	}
-	else{
-		if(options.position=='bottom'){
-		}
-		else{
-			if(options.position=='left'){
-			}
-			else{
-				if(options.position=='right'){
-				}
-			}
-		}
-	}
 	
 	$pointer.css('left',pointerCoord.x);
 	$pointer.css('top',pointerCoord.y);
