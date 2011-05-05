@@ -1,22 +1,26 @@
 (function($){
 	/**
 	Options
+	useTitle	:	To allow the user to use the element's title as the content of the bubble. Default : false - TODO
 	content		:	The html that will be visible in the bubble
 	display		: 	The event based upon which the bubble will appear
 	duration	:	The duration in milliseconds for which the bubble should be visible
 	position	:	The position where the bubble should appear. Valid values are 'top','right','left','bottom' --TODO
 	maxWidth	:	The maximum allowed width in pixels to which the bubble is allowed to expand until it wraps the content.
 	distance	:	The horizontal or vertical distance from the dom container where the bubble should appear.  --TODO
+	autoClose	:	A boolean indicating if bubble autocloses after a duration or the user needs to close it manually. Default True -- TODO
 	*/
 
  var myBubblePrototype={
   options:{
-	content:'Default Text as das da sd asd a sd a sd as',
+	useTitle:false,
+	content:'Default Text as das da sd asd a sd a sd as sad asd as das d ',
 	display:'click',
 	duration:2000,
 	position:'left',
 	maxWidth:200,
-	distance:0
+	distance:0,
+	autoClose:true
   },
   _create:function(){
 	//console.log('create');
@@ -24,57 +28,46 @@
 	var $domElement=widget.element;
 	var options=widget.options;
 	
-	/*Create the dom element that will be used to hold the details of the bubble*/
-	var $bubble = $('<span></span>');
-	var $pointer = $('<span></span>');
+	/*Create the dom containers that will be used to hold the details of the bubble*/
+	var $container=$('<div class="bubble-container"></div>');
 	
-	var $container=$('<span style="overflow:auto;display:inline-block;background-color:transparent;"></span>');
-	//console.log($container);
+	var $closeButton=$('<span name="closeButtonSpan"></span>');
+	var $bubble = $('<span name="bubbleSpan"></span>');
+	var $pointer = $('<span name="pointerSpan"></span>');
+	
+	
+	/*Add the elements to the DOM*/	
+	$container.append($closeButton);
 	$container.append($bubble);
 	$container.append($pointer);
-	
-	//console.dir($container);
-	//console.log($container.html());
 	
 	/*The css class for the bubble*/
 	$bubble.addClass('bubble-visible');
 	$bubble.html(options.content);
 	
-	
-	var position = widget._getPosition($domElement[0]);
-	
-	/*By default, the bubble is hidden*/
-	//$bubble.css({'opacity':0,'display':'none'});
-	//$bubble.css({'opacity':0,'display':'none'});
 	$('body').append($container);
-	widget.bubble=$bubble;
-	widget.pointer=$pointer;
+	
 	widget.container=$container;
 	
 	/*Now that the bubble has been added to the DOM, you can make several calculations 
 	for its positioning based upon its initial rendering*/
-
+	
 	if($bubble.width()>options.maxWidth){
 		/*since the max-width property does not work in IE, 
 		we set the max width by comparison after the element is added to the dom*/
+		
+		$container.css({'opacity':'0','width':options.maxWidth});
 		$bubble.css({'width':options.maxWidth});
-		$container.css({'opacity':'0'});
 	}
-	var presets = widget._getPresets();
+	widget._setup();
 	
-	//console.log('presets.coordinates.x ' + presets.coordinates.x);
-	//console.log('presets.coordinates.y ' + presets.coordinates.y);
-	
-	//$bubble.css('left',position.x+$domElement.outerWidth());
-	$bubble.css('left',presets.coordinates.x);
-	$bubble.css('top',presets.coordinates.y);
-
+	/*By default, the container is hidden*/
 	$container.hide();
+
 	if($bubble.width()>options.maxWidth){
 		/*since the max-width property does not work in IE, 
 		we set the max width by comparison after the element is added to the dom*/
 		//$bubble.css({'width':options.maxWidth,'opacity':'0'});
-		
 	}
 	
 	/*Bind the event of the browser to the dom element*/
@@ -130,12 +123,14 @@
 		y:curtop
 	};
   },
-  _getPresets:function(){
+  _setup:function(){
 	var widget=this;
 	var $domElement=widget.element;
 	var options=widget.options;
-	var $bubble = widget.bubble;
-	var $pointer = widget.pointer;
+	var $container = widget.container;
+	var $bubble = $container.find('[name="bubbleSpan"]');
+	var $pointer = $container.find('[name="pointerSpan"]');
+	var $closeButton = $container.find('[name="closeButtonSpan"]');
 	
 
 	/*This function will be used to set up the presets for the widget*/
@@ -178,15 +173,17 @@
 		
 		coord.y=position.y-($bubble.outerHeight()+options.distance);
 		coord.x=position.x+($domElement.outerWidth()/2-$bubble.outerWidth()/2);
-		pointerCoord.x=domCenter.x - $pointer.outerWidth()/2;
-		pointerCoord.y=position.y - options.distance-1;
+		
+		pointerCoord.x=$bubble.outerWidth()/2-$pointer.outerWidth()/2;
+		pointerCoord.y=$bubble.outerHeight()-1;
 	}
 	else{
 		if(options.position=='bottom'){
 			$pointer.addClass('triangle-point-top');
 			$pointer.css('border-bottom-width',options.distance);
-			pointerCoord.x=domCenter.x - $pointer.outerWidth()/2;
-			pointerCoord.y=position.y+$domElement.outerHeight()+1;
+			
+			pointerCoord.x=$bubble.outerWidth()/2-$pointer.outerWidth()/2;
+			pointerCoord.y=-(options.distance-1);
 			
 			coord.y=(position.y+$domElement.outerHeight())+options.distance;
 			coord.x=position.x+($domElement.outerWidth()/2-$bubble.outerWidth()/2);
@@ -197,8 +194,8 @@
 				$pointer.addClass('triangle-point-right');
 				$pointer.css('border-left-width',options.distance);
 				
-				pointerCoord.x=position.x-(options.distance+1);
-				pointerCoord.y=domCenter.y-$pointer.outerHeight()/2;
+				pointerCoord.x=$bubble.outerWidth()-1;
+				pointerCoord.y=$container.outerHeight()/2-($pointer.outerHeight()/2);
 				coord.x=position.x-($bubble.outerWidth()+options.distance);
 				coord.y=position.y+($domElement.outerHeight()/2-$bubble.outerHeight()/2);
 			}
@@ -207,8 +204,8 @@
 					$pointer.addClass('triangle-point-left');
 					$pointer.css('border-right-width',options.distance);
 					
-					pointerCoord.x=position.x+$domElement.outerWidth()+1;
-					pointerCoord.y=domCenter.y-$pointer.outerHeight()/2;
+					pointerCoord.x=-(options.distance-1);
+					pointerCoord.y=$container.outerHeight()/2-($pointer.outerHeight()/2);
 					coord.x=position.x+($domElement.outerWidth()+options.distance);
 					coord.y=position.y+($domElement.outerHeight()/2-$bubble.outerHeight()/2);
 				}
@@ -216,9 +213,18 @@
 		}
 	}
 	
-	
-	$pointer.css('left',pointerCoord.x);
+	if(!options.autoClose){
+		$closeButton.html('Close').addClass('bubble-close-button');
+		$bubble.css({'padding-top':'10px'})
+	}
+
 	$pointer.css('top',pointerCoord.y);
+	$pointer.css('left',pointerCoord.x);
+	
+	$container.css('left',coord.x);
+	$container.css('top',coord.y);
+
+	
 	
 	return {
 		coordinates : coord

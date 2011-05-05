@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+	
+		<link rel="stylesheet" href="../css/jqueryApiCheatSheet.css"></link>
+		
+		<script type="text/javascript" src="../../jquery.js"></script>
+		<script type="text/javascript">
+			$(function(){
+			
+				$(".category-list li").click(function(){
+					
+						var $this =$(this);
+						
+						//alert($('div[name="'+$this.html() +'"]').size());
+						
+						$('.category-current .category').insertAfter($('.category-current'));
+						$('.category-current').append($('div[name="'+$this.html() +'"]').parent());
+				});
+				
+			});
+		</script>
+		
+	</head>
+	<body>
+		<div class="main-container">
+			
+			<div class="banner"></div>
+			
+			<div class="menu">
+			
+				<ul class="category-list">
+					
+					<li>core</li>
+					<li>Category 2</li>
+					<li>Category 3</li>
+					
+				</ul>
+			
+			</div>
+			
+			<div class="api-container">
+				
+				<div class="category-current">
+					
+					<div class="category">
+
+						<div name="core" class="category-header">core</div>
+					
+						<div class="category-contents">
+							<ul class="api-list">
+<li><a href="">jQuery.holdReady()</a></li>
+<li><a href="">jQuery()</a></li>
+<li><a href="">jQuery.noConflict()</a></li>
+<li><a href="">jQuery.sub()</a></li>
+<li><a href="">jQuery.when()</a></li>
+							</ul>
+						</div>
+				
+					</div>
+				
+					
+				</div>
+
+				<div class="category">
+				
+					<div name="Category 2" class="category-header">Category 2</div>
+					
+					<div class="category-contents">
+						<ul class="api-list">
+							<li class="api-list-item">
+								<a href="">Function Name</a>
+							</li>
+							<li class="api-list-item">
+								<a href="">Function Name</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				
+				<div class="category">
+				
+					<div name="Category 3" class="category-header">Category 3</div>
+					
+					<div class="category-contents">
+						<ul class="api-list">
+							<li class="api-list-item">
+								<a href="">Function Name</a>
+							</li>
+							<li class="api-list-item">
+								<a href="">Function Name</a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</body>
+	<style type="text/css">
+		
+		<!--
+		$.each($('.title-link'),function(){
+console.log('<li><a href="">'+ $(this).html() +'</a></li>');
+});
+		-->
+		
+	</style>
+		
+</html>
