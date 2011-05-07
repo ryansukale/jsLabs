@@ -23,7 +23,10 @@ jQuery.fn.highlighter=function(){
 		$wrapper.css('position',$this.css('position'));
 		$wrapper.css('top',$this.css('top'));
 		$wrapper.css('left',$this.css('left'));
-		$wrapper.css('margin',$this.css('margin'));
+		$wrapper.css('margin-top',$this.css('margin-top'));
+		$wrapper.css('margin-right',$this.css('margin-right'));
+		$wrapper.css('margin-bottom',$this.css('margin-bottom'));
+		$wrapper.css('margin-left',$this.css('margin-left'));
 		$wrapper.css('clear',$this.css('clear'));
 		$wrapper.css('float',$this.css('float'));
 		
