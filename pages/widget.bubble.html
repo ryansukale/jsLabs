@@ -17,6 +17,9 @@
 				$('input[name="userName"]').eq(2).bubble({position:'top'});
 				$('input[name="userName"]').eq(3).bubble({position:'bottom',distance:50});
 				$('input[name="userName"]').eq(4).bubble({position:'bottom',distance:10,autoClose:false});
+				$('input[name="userName"]').eq(5).bubble({position:'right',distance:40,event:'hover',duration:2000});
+				$('input[name="userName"]').eq(6).bubble({position:'left',distance:40,event:'hover',duration:2000,autoClose:true});
+				$('input[name="userName"]').eq(7).bubble({position:'right',distance:10,event:'hover',color:'#999999',autoClose:true});
 			});
 		</script>
 		
@@ -39,6 +42,21 @@
 				</input>
 			</div>
 
+			<div style="float:left;overflow:auto;background-color:blue;margin:10px;">
+				<input type="text" name="userName">
+				</input>
+			</div>
+			
+			<div style="float:left;overflow:auto;background-color:blue;margin:10px;">
+				<input type="text" name="userName">
+				</input>
+			</div>
+			
+			<div style="float:left;overflow:auto;background-color:blue;margin:10px;">
+				<input type="text" name="userName">
+				</input>
+			</div>
+			
 			<div style="float:left;overflow:auto;background-color:blue;margin:10px;">
 				<input type="text" name="userName">
 				</input>
@@ -78,6 +96,7 @@
 				position:relative;
 				float:left;
 				z-index:10;
+				display:none;
 			}
 			
 			div.container{
