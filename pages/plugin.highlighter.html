@@ -1,0 +1,82 @@
+<html>
+	<head>
+		<script type="text/javascript" src="../../jquery.js"></script>
+		<script type="text/javascript" src="../plugins/jquery.highlighter/jquery.highlighter.js"></script>
+		
+		<link rel="stylesheet" href="../plugins/jquery.highlighter/css/jquery.highlighter.css" ></link>
+		
+		<script type="text/javascript">
+			$(function(){		
+				
+				$('.login-form').addClass("round-all");
+				//$('.login-form input[type="text"]').highlighter();
+				//$('.login-form input[type="password"]').highlighter();
+				
+			});
+		</script>
+		
+		<style type="text/css">
+		
+		
+		input{
+			float:right;
+		}
+		
+		.login-form{
+			border:1px solid grey;
+			width:260px;
+			position:relative;
+			overflow:auto;
+			float:left;
+			margin:5px;
+			background-color:#f9f9f9;
+		}
+		
+		.desc{
+			float:left;
+			font-weight:bold;
+			color:#333333;
+		}
+		
+		.form-input{
+			clear:both;
+			background-color:transparent; /*#f9f9f9*/
+			padding:5px;
+			overflow:auto;
+			margin:5px;
+			clear:both;
+		}
+		
+		
+		.heading{
+			text-align:center;
+			border-bottom:1px solid green;
+			padding-bottom:10px;
+			color:blue;
+		}
+		
+		</style>
+		
+	</head>
+	<body>
+	
+		<div class="login-form">
+			<h4 class="heading">Sign In</h4>
+			<form action="#" name="sampleForm">
+				<div class="form-input">
+					<div class="desc">User Name</div>
+					<input type="text"></input>
+				</div>
+				<div class="form-input">
+					<div class="desc">Password</div>
+					<input type="password"></input>
+				</div>
+				<div class="form-input">
+					<input type="submit" value="Login"></submit>
+				</div>
+			</form>
+		</div>
+		
+
+	</body>
+</html>

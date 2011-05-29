@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+	<head>
+	
+		<link rel="stylesheet" href="../widgets/jquery.envelope/css/jquery.envelope.css"></link>
+		
+		<script type="text/javascript" src="../../jquery.js"></script>
+		<script type="text/javascript" src="../../jquery-ui-1.8.11.custom/development-bundle/ui/jquery.ui.widget.js"></script>
+		
+		<script type="text/javascript" src="../plugins/jquery.curve/jquery.curve.js"></script>
+		<script type="text/javascript" src="../plugins/jquery.shadow/jquery.shadow.js"></script>
+		<script type="text/javascript" src="../plugins/jquery.envelope/jquery.envelope.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){		
+				$('.target').eq(0).curve('60px').shadow().envelope();
+				
+			});
+		</script>
+		
+				
+	</head>
+	<body>
+		<div class="container">
+			<div class="target">
+				Some Content
+			</div>
+		</div>
+	</body>
+	<style type="text/css">
+			
+			.target{
+				border:1px solid grey;
+				padding:10px;
+				background-color:#fafafa;
+				overflow:auto;
+				height:100px;
+				width:100px;
+				text-align:center;
+				margin:10px;
+			}
+			
+			div.container{
+				position:relative;
+				top:100px;
+				left:300px;
+				overflow:auto;
+				width:400px;
+				height:300px;
+			}
+		
+		</style>
+		
+</html>

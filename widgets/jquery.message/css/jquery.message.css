@@ -1,0 +1,81 @@
+.message-visible{
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-border-radius: 5px;
+
+	display:inline-block;
+	background-color:#4a4a4a;
+	color:#ffffff;
+	padding:5px;
+	text-align:center;
+	position:relative;
+	z-index:1000;
+}
+
+.message-container-visible{
+	-moz-border-radius:5px;
+	border-radius:5px;
+	-webkit-border-radius: 5px;
+}
+
+
+.triangle-point-top{
+	position:absolute;
+	border-right:6px solid transparent;
+	border-bottom:21px solid #fafafa;
+	border-left:6px solid transparent;
+	width:0px;
+	display:inline-block;
+	z-index: 1001;
+}
+
+
+.triangle-point-right{
+	position:absolute;
+	border-top:6px solid transparent;
+	border-bottom:6px solid transparent;
+	border-left:21px solid #fafafa;
+	width:0px;
+	display:inline-block;
+	z-index: 1001;
+}
+
+
+.triangle-point-bottom{
+	position:absolute;
+	border-top:21px solid #fafafa;
+	border-right:6px solid transparent;
+	border-left:6px solid transparent;
+	width:0px;
+	display:inline-block;
+	z-index: 1001;
+}
+
+
+.triangle-point-left{
+	position:absolute;
+	border-top:6px solid transparent;
+	border-right:21px solid #fafafa;
+	border-bottom:6px solid transparent;
+	width:0px;
+	display:inline-block;
+	z-index: 1001;
+}
+
+.message-container{
+	position:absolute;
+	display:block;
+	background-color:transparent;
+}
+
+.message-close-button{
+	position:absolute;
+	right:0px;
+	top:0px;
+	z-index:1001;
+	clear:both;
+	font-size:12px;
+	color:white;
+	text-decoration:underline;
+	cursor:pointer;
+}

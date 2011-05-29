@@ -1,0 +1,1 @@
+This plugin will take a given dom element and animate its border to give a shadow effect as specidied by the parameters.

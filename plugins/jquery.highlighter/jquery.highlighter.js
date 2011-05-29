@@ -3,33 +3,42 @@
 /*Get the path to import the CSS file for the plugin into the main HTML files*/
 var jsFilePath = $("head").find("script:last").attr('src');
 var cssFilePath = jsFilePath.substring(0,jsFilePath.lastIndexOf('/')+1)  + 'css/jquery.highlighter.css'
-$('head').append('<link rel="stylesheet" href="'+cssFilePath+'" />');
+$('head').append('<link rel="stylesheet" href="'+cssFilePath+'" ></link>');
 
 
 jQuery.fn.highlighter=function(){
 	return this.each(function(){
 		var $this =$(this);
 		
-		/*Remove the existing border styles if any*/
-		$this.css({'border':'none','outline':'none','background-color':'transparent'});
+		var borderColor='#7F9DB9';    //The default border color of input elements
+		var highlightColor='#dddd00'; //bright yellow color for the border on field highlighting
 		
 		/*Create a container to wrap the fields*/
 		var $wrapper = $('<span></span>');
 		
 		/*Add styling to the wrapper*/
-		$wrapper.addClass("round-all-5px field-normal");
+		$wrapper.addClass("round-all field-normal");
 		
 		/*Steal the positioning properties of the field and apply them to the wrapper*/
-		$wrapper.css('position',$this.css('position'));
-		$wrapper.css('top',$this.css('top'));
-		$wrapper.css('left',$this.css('left'));
-		$wrapper.css('margin-top',$this.css('margin-top'));
-		$wrapper.css('margin-right',$this.css('margin-right'));
-		$wrapper.css('margin-bottom',$this.css('margin-bottom'));
-		$wrapper.css('margin-left',$this.css('margin-left'));
-		$wrapper.css('clear',$this.css('clear'));
-		$wrapper.css('float',$this.css('float'));
+		var properties = {
+			'position':$this.css('position'),
+			'top':$this.css('top'),
+			'left':$this.css('left'),
+			'margin-top':$this.css('margin-top'),
+			'margin-right':$this.css('margin-right'),
+			'margin-bottom':$this.css('margin-bottom'),
+			'margin-left':$this.css('margin-left'),
+			'clear':$this.css('clear'),
+			'float':$this.css('float'),
+			'border-color':borderColor
+		};
 		
+		$wrapper.css(properties);
+		
+		/*Remove the existing border styles if any*/
+		$this.css({'border':'none','outline':'none','background-color':'transparent'});
+		
+		/*Clear the positional properties*/
 		$this.css({'position':'relative','top':'0px','left':'0px','float':'none','margin':'0px','clear':'none'});
 		
 		/*Wrap the fields with the styled wrapper*/
@@ -38,10 +47,12 @@ jQuery.fn.highlighter=function(){
 		/*Associate the custom css classes with the wrapper on field focus*/
 		$this.focus(function(){
 			var $this =$(this);
-			$this.parent().addClass('field-highlighted');
+			$this.parent().addClass('field-highlighted')
+							.css('border-color',highlightColor);
 		}).blur(function(){
 			var $this =$(this);
-			$this.parent().removeClass('field-highlighted');
+			$this.parent().removeClass('field-highlighted')
+							.css('border-color',borderColor);
 		});
 		
 	});
