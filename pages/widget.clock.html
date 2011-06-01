@@ -4,6 +4,8 @@
 <html>
 	<head>
 		
+		<link rel="stylesheet" href="../widgets/jquery.clock/css/jquery.clock.css" />
+		
 		<script type="text/javascript" src="../../jquery.js"></script>
 		<script type="text/javascript" src="../../jquery-ui-1.8.11.custom/development-bundle/ui/jquery.ui.widget.js"></script>
 		<script type="text/javascript" src="../widgets/jquery.clock/jquery.clock.js"></script>
@@ -28,23 +30,34 @@
 				<input type="text" name="userName">
 				</input>
 			</div>
-
-			<div class="widget-clock">
-				<div class="widget-hour-hand"></div>
-				<div class="widget-minute-hand"></div>
-				<div class="time-0">|</div>
-				<div class="time-1">|</div>
-				<div class="time-2">|</div>
-				<div class="time-3">|</div>
-				<div class="time-4">|</div>
-				<div class="time-5">|</div>
-				<div class="time-6">|</div>
-				<div class="time-7">|</div>
-				<div class="time-8">|</div>
-				<div class="time-9">|</div>
-				<div class="time-10">|</div>
-				<div class="time-11">|</div>
+<!--
+			<div class="widget-clock-container">
+				<div class="widget-clock-dial">
+					<div class="widget-clock-dial-center"></div>
+					<div class="widget-hour-hand"></div>
+					<div class="widget-minute-hand"></div>
+					<div class="time-0">|</div>
+					<div class="time-1">|</div>
+					<div class="time-2">|</div>
+					<div class="time-3">|</div>
+					<div class="time-4">|</div>
+					<div class="time-5">|</div>
+					<div class="time-6">|</div>
+					<div class="time-7">|</div>
+					<div class="time-8">|</div>
+					<div class="time-9">|</div>
+					<div class="time-10">|</div>
+					<div class="time-11">|</div>
+				</div>
+				
+				<div class="widget-clock-controls">
+					<div class="control-selection">HOUR</div>
+					<div class="control-selection">MINUTES</div>
+				</div>
+				
 			</div>
+	-->		
+			
 			
 		</div>
 	</body>
@@ -53,218 +66,6 @@
 	body{
 			background-color:white;
 		}
-
-body{
-			background-color:white;
-		}
-
-.widget-clock{
-				position:relative;
-				width:200px;
-				height:200px;
-				left:100px;
-				top:100px;
-				background-color:#eaeaea;
-				padding:0px;
-				
-			}
-
-
-			.widget-hour-hand{
-				border:2px solid black;
-				width:40px;
-				height:0px;
-				position:absolute;
-				top:100px;
-				left:100px;
-				
-				-moz-transform-origin:0px 0px;
-				-moz-transform: rotate(25deg);  /* FF3.5+ */
-			}
-			
-			.widget-minute-hand{
-				border:2px solid black;
-				width:80px;
-				height:0px;
-				position:absolute;
-				top:100px;
-				left:100px;
-				-moz-transform-origin:0px 0px;
-				     -moz-transform: rotate(45deg);  /* FF3.5+ */
-       -o-transform: rotate(90deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(90deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(90deg);  /* IE9 */
-          transform: rotate(90deg);  
-			}
-			
-			.time-0{
- position:absolute;
- top:-5px;
- left:98px;
-			}
-
-			.time-1{
- position:absolute;
- top:-2px;
- left:155px;
- -moz-transform: rotate(30deg);  /* FF3.5+ */
-       -o-transform: rotate(30deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(30deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(30deg);  /* IE9 */
-          transform: rotate(30deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=0.8660254037844387, M12=-0.49999999999999994, M21=0.49999999999999994, M22=0.8660254037844387, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-
-			.time-2{
- position:absolute;
- top:40px;
- left:190px;
-     -moz-transform: rotate(60deg);  /* FF3.5+ */
-       -o-transform: rotate(60deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(60deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(60deg);  /* IE9 */
-          transform: rotate(60deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=0.5000000000000001, M12=-0.8660254037844386, M21=0.8660254037844386, M22=0.5000000000000001, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-			.time-4{
- position:absolute;
- top:150px;
- left:190px;
-     -moz-transform: rotate(120deg);  /* FF3.5+ */
-       -o-transform: rotate(120deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(120deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(120deg);  /* IE9 */
-          transform: rotate(120deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=-0.4999999999999998, M12=-0.8660254037844387, M21=0.8660254037844387, M22=-0.4999999999999998, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-
-			.time-8{
- position:absolute;
- top:150px;
- left:5px;
-     -moz-transform: rotate(-120deg);  /* FF3.5+ */
-       -o-transform: rotate(-120deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-120deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(-120deg);  /* IE9 */
-          transform: rotate(-120deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=-0.4999999999999998, M12=0.8660254037844387, M21=-0.8660254037844387, M22=-0.4999999999999998, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-
-			.time-10{
- position:absolute;
- top:40px;
- left:5px;
-     -moz-transform: rotate(-60deg);  /* FF3.5+ */
-       -o-transform: rotate(-60deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-60deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(-60deg);  /* IE9 */
-          transform: rotate(-60deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=0.5000000000000001, M12=0.8660254037844386, M21=-0.8660254037844386, M22=0.5000000000000001, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-			.time-11{
- position:absolute;
- top:-5px;
- left:40px;
-     -moz-transform: rotate(-35deg);  /* FF3.5+ */
-       -o-transform: rotate(-35deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-35deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(-35deg);  /* IE9 */
-          transform: rotate(-35deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=0.8191520442889918, M12=0.573576436351046, M21=-0.573576436351046, M22=0.8191520442889918, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-
-			.time-7{
- position:absolute;
- top:180px;
- left:40px;
-     -moz-transform: rotate(35deg);  /* FF3.5+ */
-       -o-transform: rotate(35deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(35deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(35deg);  /* IE9 */
-          transform: rotate(35deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=0.8191520442889918, M12=-0.573576436351046, M21=0.573576436351046, M22=0.8191520442889918, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-
-
-			.time-5{
- position:absolute;
- top:180px;
- left:150px;
-   -moz-transform: rotate(-35deg);  /* FF3.5+ */
-       -o-transform: rotate(-35deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(-35deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(-35deg);  /* IE9 */
-          transform: rotate(-35deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=0.8191520442889918, M12=0.573576436351046, M21=-0.573576436351046, M22=0.8191520442889918, sizingMethod='auto expand');
-               zoom: 1;
-
-			}
-
-			.time-6{
- position:absolute;
- top:180px;
- left:98px;
-			}
-			
-			.time-3{
-			
-			position:absolute;
-			left:190px;
-			top:95px;
-				-moz-transform: rotate(90deg);  /* FF3.5+ */
-       -o-transform: rotate(90deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(90deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(90deg);  /* IE9 */
-          transform: rotate(90deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=6.123031769111886e-17, M12=-1, M21=1, M22=6.123031769111886e-17, sizingMethod='auto expand');
-               zoom: 1;
-			}
-			
-
-.time-9{
-			
-			position:absolute;
-			left:10px;
-			top:95px;
-				-moz-transform: rotate(90deg);  /* FF3.5+ */
-       -o-transform: rotate(90deg);  /* Opera 10.5 */
-  -webkit-transform: rotate(90deg);  /* Saf3.1+, Chrome */
-      -ms-transform: rotate(90deg);  /* IE9 */
-          transform: rotate(90deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix(/* IE6–IE9 */ 
-                     M11=6.123031769111886e-17, M12=-1, M21=1, M22=6.123031769111886e-17, sizingMethod='auto expand');
-               zoom: 1;
-			}
 			div.div2{
 				width:100px;
 				height:100px;
@@ -286,9 +87,7 @@ body{
 			
 			
 			div.container{
-				position:relative;
-				top:100px;
-				left:300px;
+				
 				overflow:auto;
 				width:400px;
 				height:300px;
