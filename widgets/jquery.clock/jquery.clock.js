@@ -1,9 +1,27 @@
+/**
+* Copyright 2011 Ryan Sukale
+* This program is distributed under the terms of the GNU General Public License Version 3.
+* Please check license.txt for details or log on to http://www.gnu.org/licenses/gpl.html
+*/
+
+/**
+*	TODO
+*	Implement closeOnEscape.
+*	Provide event handling functions such as open and close.
+*	Implement the destroy function for cleanup.
+*	Handle CSS3 properties for all the supporting browsers.
+*	Default time
+*	Time in the clock should change if the user edits the field.
+*	Remove all the extra logging.
+*	Fix the bug of displaying the time properly when the minutes selected by the user is 60.
+*/
+
 (function($){
  var clockPrototype={
   options:{
   },
   _create:function(){
-	   console.log('clock create');
+	   //console.log('clock create');
 	   var widget=this;
 	   var $domElement=widget.element;
 	   var options=widget.options;
@@ -11,26 +29,35 @@
 	   //Create the dom for the clock widget
 	   var $clockContainer = widget._createClock();
 	   
+	   widget.clockContainer = $clockContainer;
 	   
 	   $('body').append($clockContainer);
 	   $clockContainer.hide();
 	   
+	   //var clockPosition = widget._setClockPosition();
+	   
 	   $domElement.click(function(){
-		$clockContainer.show();
+		//$clockContainer.show();
+		widget.open();
 	   });
 	   
 	   $('.widget-clock-controls .control-selection',$clockContainer).click(function(event){
 		var $this = $(this);
-		
-		//console.log('selected hand');
-		$this.addClass('widget-clock-selected-hand')
-			.siblings().removeClass('widget-clock-selected-hand');
+		$this.addClass('widget-clock-selected-hand shadow1')
+			.siblings().removeClass('widget-clock-selected-hand shadow1');
 	   });
 	   
-	   var time = {hours:10,mins:10};	
+	   var time = {hours:10,mins:10};
+	   //widget._updateTime(time);
+	   //var displayHours = time.hours<10?'0'+time.hours:time.hours;
+	   //var displayMins= time.mins<10?'0'+time.mins:time.mins;
+		
+		//$('.widget-clock-display .widget-time-display',$clockContainer).html(displayHours + " : " + displayMins);	
+	   
 	   $(".widget-clock-dial",$clockContainer).bind('click',function(event){
 			//console.log("x : " + event.pageX+ " y : " + event.pageY);
-			
+			widget.open();
+			widget._updateTime(time);
 			var $hourHand = $('.widget-hour-hand',$(this));
 			var $minuteHand = $('.widget-minute-hand',$(this));
 			
@@ -60,16 +87,62 @@
 				
 			}
 			
-			console.log(time);
+			//console.log("asd");
+			//displayHours = time.hours<10?'0'+time.hours:time.hours;
+			//displayMins= time.mins<10?'0'+time.mins:time.mins;
+			widget._updateTime(time);
+			//$('.widget-clock-display .widget-time-display',$clockContainer).html(
+			//	displayHours + " : " + displayMins);
+			//$domElement.val(displayHours + " : " + displayMins + " " + $('.widget-meridian-display span:visible',$clockContainer).html());
+			
 			
 	   });
+	   
+	    $('.widget-ok-button',$clockContainer).mousedown(function(){
+			$(this).toggleClass('shadow1 gradient4');
+		}).mouseup(function(){
+			$(this).toggleClass('shadow1 gradient4');
+		})
+		.click(function(){
+			//$domElement.val(displayHours + " : " + displayMins + " " + $('.widget-meridian-display span:visible',$clockContainer).html());
+			widget.close();
+		});
+   
+		$('.widget-meridian-display',$clockContainer).click(function(event){
+			$('span',$(this)).toggleClass('widget-clock-hidden');
+			widget._updateTime(time);
+			console.log('updating time');
+		})
+		.hover(
+			function(){
+				$(this).toggleClass('widget-clock-meridian-hover');
+			}/*,
+			function(){
+				$(this).removeClass('widget-clock-meridian-hover');
+			}*/
+		);
+		widget._updateTime(time);
+		
 	 
   },
   _init:function(){
-   //console.log('init');
+    
+  },
+  open:function(){
+	var widget=this;
+	$clockContainer=widget.clockContainer;
+	$clockContainer.show();
+	widget._setClockPosition();
+  },
+  close:function(){
+	var widget=this;
+	//var $domElement=widget.element;
+	//var options=widget.options;
+	widget.clockContainer.hide();
+	//$domElement.hide();
   },
   _getDegreeAngle:function(event,originOffset){
-	//console.log('calculating angle');
+	
 	var x = event.pageX - originOffset.x;
 	var y = event.pageY - originOffset.y;
 	
@@ -90,9 +163,9 @@
 	
 	roundedOffAngle=roundedOffAngle==-180?180:roundedOffAngle;
 	//console.log('remainder : '+remainder);
-	console.log('actualAngle : '+actualAngle);
-	console.log('floor : '+floor);
-	console.log('ceil : '+ceil);
+	//console.log('actualAngle : '+actualAngle);
+	//console.log('floor : '+floor);
+	//console.log('ceil : '+ceil);
 	//console.log('roundedOffAngle : '+roundedOffAngle);
 	
 	return roundedOffAngle;
@@ -100,13 +173,6 @@
   },
   _createClock:function(){
   
-	/*
-	var $clockContainer=$('<div class="widget-clock-container"></div>');
-	var $dial=$('<div class="widget-dial"></div>');
-	var $controls=$('<div class="widget-clock-controls"></div>');
-	
-	var $controls=$('<div class="widget-clock-dial-center"></div>');
-	*/
 	
 	return $('<div class="widget-clock-container">'+
 				'<div class="widget-clock-dial">'+
@@ -128,10 +194,16 @@
 				'</div>'+
 				'<div class="widget-clock-controls">'+
 				'	<div class="control-selection">HOUR</div>'+
-				'	<div class="control-selection">MINUTES</div>'+
+				'	<div class="control-selection widget-clock-selected-hand shadow1">MINUTES</div>'+
 				'</div>'+
 				'<div class="widget-clock-display">'+
+				'	<div class="widget-time-display"></div>'+
+				'	<div class="widget-meridian-display">'+
+				'		<span class="meridian-am">AM</span>'+
+				'		<span class="meridian-pm widget-clock-hidden">PM</span>'+
+				'	</div>'+
 				'</div>'+
+				'<div class="widget-ok-button shadow1">&#x2714;</div>'+
 			'</div>');
 	
   },
@@ -175,16 +247,11 @@
 	var currentHourAngle = time.hours*30;
 	
 	if(minutesAngle==360){
-	time.hours=time.hours+1;
-	
+		time.hours=time.hours+1;
 	}
 	currentHourAngle=currentHourAngle==360?0:currentHourAngle;
 	
 	var newHourAngle = currentHourAngle + (minutesAngle/360)*30;
-	
-	//console.log('currentHourAngle : '+currentHourAngle);
-	//console.log('newHourAngle : '+newHourAngle);
-	//console.log('minutesAngle : '+minutesAngle);
 	
 	var cssAngle = 0;
 	if(newHourAngle>90&&newHourAngle<270){
@@ -197,6 +264,47 @@
 	console.log('cssAngle : '+cssAngle);
 	
 	return cssAngle;
+  },
+  _updateTime:function(time){
+	var widget=this;
+	var $domElement=widget.element;
+	var options=widget.options;
+	var $clockContainer = widget.clockContainer;
+	
+	//console.dir(time);
+	var displayHours = time.hours<10?'0'+time.hours:time.hours;
+	var displayMins= time.mins<10?'0'+time.mins:time.mins;
+	
+	$('.widget-clock-display .widget-time-display',$clockContainer).html(displayHours + " : " + displayMins);
+	$domElement.val(displayHours + " : " + displayMins + " " + $('.widget-meridian-display span:not([class*="widget-clock-hidden"])',$clockContainer).html());
+	
+  },
+  _setClockPosition:function(){
+	var widget=this;
+	var $domElement=widget.element;
+	var options=widget.options;
+	var $clockContainer = widget.clockContainer;
+	
+	var domPosition = widget._getPosition($domElement[0]);
+	var clockHeight = $clockContainer.outerHeight();
+	var domElementHeight = $domElement.outerHeight();
+	
+	//console.log('element coord x : '+ domPosition.x + " y : " + domPosition.y);
+	//console.log('clock dimention height : '+ $clockContainer.outerHeight() );
+	var clockPosition = {x:domPosition.x,y:0};
+	
+	//console.log($(window).height());
+	//console.log(domPosition.y + domElementHeight+clockHeight/2);
+	
+	
+	if((domPosition.y + domElementHeight+clockHeight/2)>$(window).height()){
+		clockPosition.y = domPosition.y - clockHeight;
+	}
+	else{
+		clockPosition.y = domPosition.y + domElementHeight;
+	}
+	
+	$clockContainer.css({'top':clockPosition.y,'left':clockPosition.x});
   }
  };
  
